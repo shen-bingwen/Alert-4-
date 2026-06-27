@@ -1,0 +1,30 @@
+{
+  "appName": "4%定投提醒工具",
+  "schedule": {
+    "enabled": true,
+    "onlyTradingHours": true
+  },
+  "rules": {
+    "triggerDropPct": 4,
+    "oncePerDay": true
+  },
+  "watchlist": [
+    {
+      "symbol": "510300",
+      "name": "沪深300ETF",
+      "enabled": true,
+      "notes": "改成你自己的监控标的"
+    },
+    {
+      "symbol": "159915",
+      "name": "创业板ETF",
+      "enabled": false,
+      "notes": "示例条目，可删除"
+    }
+  ],
+  "runtime": {
+    "quoteTimeoutMs": 15000,
+    "maxHistory": 80,
+    "maxChecks": 40
+  }
+}

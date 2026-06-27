@@ -1,0 +1,744 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-26T07:00:43.093Z",
+  "lastCheckSummary": {
+    "checkedAt": "2026-06-26T07:00:43.009Z",
+    "triggerSource": "auto",
+    "checkedCount": 1,
+    "triggeredCount": 0,
+    "notifyFailedCount": 0,
+    "skippedCount": 0,
+    "tradingTime": true
+  },
+  "lastChecks": [
+    {
+      "checkedAt": "2026-06-26T07:00:43.009Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.907,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7932,
+          "dropPct": 2.7932,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T07:00:43.009Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:58:41.095Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.907,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7932,
+          "dropPct": 2.7932,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:58:41.095Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:57:43.006Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.907,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7932,
+          "dropPct": 2.7932,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:57:43.006Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:55:41.084Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.904,
+          "prevClose": 5.048,
+          "rawChangePct": -2.8526,
+          "dropPct": 2.8526,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:55:41.084Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:54:42.998Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.903,
+          "prevClose": 5.048,
+          "rawChangePct": -2.8724,
+          "dropPct": 2.8724,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:54:42.998Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:52:41.079Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.909,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7536,
+          "dropPct": 2.7536,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:52:41.079Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:51:42.980Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.911,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7139,
+          "dropPct": 2.7139,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:51:42.980Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:49:41.067Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.918,
+          "prevClose": 5.048,
+          "rawChangePct": -2.5753,
+          "dropPct": 2.5753,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:49:41.067Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:48:42.971Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.921,
+          "prevClose": 5.048,
+          "rawChangePct": -2.5158,
+          "dropPct": 2.5158,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:48:42.971Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:46:41.059Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.923,
+          "prevClose": 5.048,
+          "rawChangePct": -2.4762,
+          "dropPct": 2.4762,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:46:41.059Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:45:42.961Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.923,
+          "prevClose": 5.048,
+          "rawChangePct": -2.4762,
+          "dropPct": 2.4762,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:45:42.961Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:43:41.056Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.921,
+          "prevClose": 5.048,
+          "rawChangePct": -2.5158,
+          "dropPct": 2.5158,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:43:41.056Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:42:42.954Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.921,
+          "prevClose": 5.048,
+          "rawChangePct": -2.5158,
+          "dropPct": 2.5158,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:42:42.954Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:40:41.042Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.926,
+          "prevClose": 5.048,
+          "rawChangePct": -2.4168,
+          "dropPct": 2.4168,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:40:41.042Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:39:42.951Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.924,
+          "prevClose": 5.048,
+          "rawChangePct": -2.4564,
+          "dropPct": 2.4564,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:39:42.951Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:37:41.030Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.911,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7139,
+          "dropPct": 2.7139,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:37:41.030Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:36:42.945Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.911,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7139,
+          "dropPct": 2.7139,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:36:42.945Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:34:41.027Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.91,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7338,
+          "dropPct": 2.7338,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:34:41.027Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:31:41.018Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.909,
+          "prevClose": 5.048,
+          "rawChangePct": -2.7536,
+          "dropPct": 2.7536,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:31:41.018Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:28:41.007Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.914,
+          "prevClose": 5.048,
+          "rawChangePct": -2.6545,
+          "dropPct": 2.6545,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:28:41.007Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T06:25:41.003Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.919,
+          "prevClose": 5.048,
+          "rawChangePct": -2.5555,
+          "dropPct": 2.5555,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T06:25:41.003Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:59:42.476Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.946,
+          "prevClose": 5.048,
+          "rawChangePct": -2.0206,
+          "dropPct": 2.0206,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:59:42.476Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:56:42.472Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.952,
+          "prevClose": 5.048,
+          "rawChangePct": -1.9017,
+          "dropPct": 1.9017,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:56:42.472Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:53:42.464Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.945,
+          "prevClose": 5.048,
+          "rawChangePct": -2.0404,
+          "dropPct": 2.0404,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:53:42.464Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:50:42.464Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.945,
+          "prevClose": 5.048,
+          "rawChangePct": -2.0404,
+          "dropPct": 2.0404,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:50:42.464Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:47:42.443Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.938,
+          "prevClose": 5.048,
+          "rawChangePct": -2.1791,
+          "dropPct": 2.1791,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:47:42.443Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:44:42.429Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.939,
+          "prevClose": 5.048,
+          "rawChangePct": -2.1593,
+          "dropPct": 2.1593,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:44:42.429Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:41:42.423Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.932,
+          "prevClose": 5.048,
+          "rawChangePct": -2.2979,
+          "dropPct": 2.2979,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:41:42.423Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:38:42.422Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.94,
+          "prevClose": 5.048,
+          "rawChangePct": -2.1395,
+          "dropPct": 2.1395,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:38:42.422Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:35:42.418Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.935,
+          "prevClose": 5.048,
+          "rawChangePct": -2.2385,
+          "dropPct": 2.2385,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:35:42.418Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:32:42.407Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.934,
+          "prevClose": 5.048,
+          "rawChangePct": -2.2583,
+          "dropPct": 2.2583,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:32:42.407Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:29:42.398Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.93,
+          "prevClose": 5.048,
+          "rawChangePct": -2.3376,
+          "dropPct": 2.3376,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:29:42.398Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:26:42.395Z",
+      "triggerSource": "auto",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.94,
+          "prevClose": 5.048,
+          "rawChangePct": -2.1395,
+          "dropPct": 2.1395,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:26:42.395Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-06-26T05:24:04.911Z",
+      "triggerSource": "manual",
+      "checkedCount": 1,
+      "triggeredCount": 0,
+      "records": [
+        {
+          "symbol": "510300",
+          "targetName": "沪深300ETF",
+          "quoteName": "沪深300ETF华泰柏瑞",
+          "currentPrice": 4.94,
+          "prevClose": 5.048,
+          "rawChangePct": -2.1395,
+          "dropPct": 2.1395,
+          "thresholdPct": 4,
+          "checkedAt": "2026-06-26T05:24:04.911Z",
+          "status": "not_triggered",
+          "message": "未达到提醒线。"
+        }
+      ]
+    }
+  ],
+  "alerts": [],
+  "dailyAlerts": {},
+  "latestQuotes": {
+    "510300": {
+      "symbol": "510300",
+      "name": "沪深300ETF华泰柏瑞",
+      "open": 5.008,
+      "prevClose": 5.048,
+      "currentPrice": 4.907,
+      "rawChangePct": -2.7932,
+      "dropPct": 2.7932,
+      "source": "sina",
+      "fetchedAt": "2026-06-26T07:00:43.092Z"
+    }
+  }
+}

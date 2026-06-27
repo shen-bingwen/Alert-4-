@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>4%定投提醒工具</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">手机可用的本地监控面板</p>
+        <h1>4%定投提醒工具</h1>
+        <p class="subtext">只监控你关心的股票或场内基金。跌幅达到或超过 4% 时，当天只提醒一次。</p>
+      </div>
+      <div class="hero-actions">
+        <button id="runCheckBtn" class="primary">立即检查一次</button>
+        <button id="saveConfigBtn">保存配置</button>
+      </div>
+    </section>
+
+    <section class="band stats-band">
+      <div class="stat">
+        <span class="label">监控标的</span>
+        <strong id="watchCount">--</strong>
+      </div>
+      <div class="stat">
+        <span class="label">最近检查</span>
+        <strong id="lastCheckAt">--</strong>
+      </div>
+      <div class="stat">
+        <span class="label">最近触发数</span>
+        <strong id="lastTriggerCount">--</strong>
+      </div>
+      <div class="stat">
+        <span class="label">交易时段</span>
+        <strong id="tradingTimeFlag">--</strong>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="section-head">
+        <h2>基础设置</h2>
+        <p>先把提醒阈值、检查频率和企业微信机器人填好。</p>
+      </div>
+      <div class="form-grid">
+        <label class="field">
+          <span>全局提醒线（跌幅 %）</span>
+          <input id="triggerDropPct" type="number" step="0.1" min="0.1">
+        </label>
+        <label class="field">
+          <span>自动检查间隔（秒）</span>
+          <input id="intervalSeconds" type="number" step="30" min="30">
+        </label>
+        <label class="field">
+          <span>自动检查开关</span>
+          <select id="scheduleEnabled">
+            <option value="true">开启</option>
+            <option value="false">关闭</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>仅交易时段检查</span>
+          <select id="onlyTradingHours">
+            <option value="true">是</option>
+            <option value="false">否</option>
+          </select>
+        </label>
+      </div>
+      <label class="field field-block">
+        <span>企业微信机器人 Webhook</span>
+        <input id="webhook" type="text" placeholder="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=...">
+      </label>
+      <p class="hint">没有填 webhook 也能运行监控，只是触发后只会记日志，不会推送到手机。</p>
+    </section>
+
+    <section class="band">
+      <div class="section-head">
+        <h2>监控列表</h2>
+        <p>默认支持 A 股和场内基金代码，6 位数字。</p>
+      </div>
+      <div class="list-actions">
+        <button id="addTargetBtn">新增一行</button>
+      </div>
+      <div id="watchlist" class="watchlist"></div>
+    </section>
+
+    <section class="band">
+      <div class="section-head">
+        <h2>最近提醒</h2>
+        <p>只保留最近的一段历史，方便你在手机上快速回看。</p>
+      </div>
+      <div id="alertList" class="history-list empty">还没有提醒记录。</div>
+    </section>
+
+    <section class="band">
+      <div class="section-head">
+        <h2>最近检查结果</h2>
+        <p>方便看哪些标的已触发、哪些今天已经提醒过。</p>
+      </div>
+      <div id="checkRecords" class="history-list empty">还没有检查记录。</div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

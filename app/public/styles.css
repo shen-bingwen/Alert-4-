@@ -1,0 +1,305 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.5;
+  background: #f3f6fb;
+  color: #162033;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f6fb;
+  color: #162033;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  border: 1px solid #cfd7e6;
+  background: #fff;
+  color: #162033;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px 14px 80px;
+}
+
+.hero,
+.band {
+  background: #fff;
+  border: 1px solid #dde4f0;
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.hero {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hero h1 {
+  margin: 4px 0 8px;
+  font-size: 28px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #4e5d78;
+  font-size: 13px;
+}
+
+.subtext {
+  margin: 0;
+  max-width: 560px;
+  color: #4e5d78;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stats-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #e5eaf4;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.stat .label {
+  display: block;
+  color: #5f6f8f;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 20px;
+}
+
+.section-head {
+  margin-bottom: 12px;
+}
+
+.section-head h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.section-head p {
+  margin: 0;
+  color: #5f6f8f;
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field span {
+  font-size: 13px;
+  color: #4e5d78;
+}
+
+.field input,
+.field select {
+  min-height: 42px;
+  border: 1px solid #ccd6e4;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.field-block {
+  margin-top: 12px;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: #5f6f8f;
+  font-size: 13px;
+}
+
+.list-actions {
+  margin-bottom: 12px;
+}
+
+.watchlist {
+  display: grid;
+  gap: 12px;
+}
+
+.target-card,
+.history-card,
+.empty-card {
+  border: 1px solid #e1e8f2;
+  border-radius: 8px;
+  padding: 14px;
+  background: #fbfdff;
+}
+
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.target-grid .notes {
+  grid-column: span 4;
+}
+
+.field.compact input,
+.field.compact select {
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.target-meta,
+.history-meta {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  color: #4e5d78;
+  font-size: 13px;
+}
+
+.history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.history-list.empty {
+  color: #5f6f8f;
+  font-size: 14px;
+}
+
+.link-danger {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: #c23636;
+}
+
+.danger {
+  color: #b42318;
+}
+
+.warn {
+  color: #b54708;
+}
+
+.success {
+  color: #027a48;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  min-width: 180px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #162033;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(14, 25, 43, 0.18);
+}
+
+.toast.success {
+  background: #027a48;
+}
+
+.toast.warn {
+  background: #b54708;
+}
+
+.toast.danger {
+  background: #b42318;
+}
+
+.toast.hidden {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 14px 12px 80px;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .stats-band,
+  .form-grid,
+  .target-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .target-grid .notes {
+    grid-column: span 1;
+  }
+
+  .history-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

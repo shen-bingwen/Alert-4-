@@ -1,0 +1,14 @@
+{
+  "name": "dingtou-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloud-ready DCA monitor dashboard",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js",
+    "check:github-actions": "node scripts/github_actions_check.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

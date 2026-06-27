@@ -1,0 +1,36 @@
+{
+  "appName": "4%定投提醒工具",
+  "schedule": {
+    "enabled": true,
+    "intervalSeconds": 180,
+    "onlyTradingHours": true
+  },
+  "rules": {
+    "triggerDropPct": 4,
+    "oncePerDay": true
+  },
+  "notification": {
+    "channel": "wecom_robot",
+    "webhook": "",
+    "mentionedMobileList": []
+  },
+  "watchlist": [
+    {
+      "symbol": "510300",
+      "name": "沪深300ETF",
+      "enabled": true,
+      "notes": "把这里换成你自己的监控标的"
+    },
+    {
+      "symbol": "159915",
+      "name": "创业板ETF",
+      "enabled": false,
+      "notes": "示例条目，可删除"
+    }
+  ],
+  "runtime": {
+    "quoteTimeoutMs": 15000,
+    "maxHistory": 120,
+    "maxChecks": 60
+  }
+}

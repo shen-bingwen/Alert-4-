@@ -1,0 +1,45 @@
+name: DCA Alert
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 1-7 * * 1-5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dca-alert
+  cancel-in-progress: false
+
+jobs:
+  check-and-notify:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run DCA alert check
+        run: node scripts/github_actions_check.js
+
+      - name: Commit state file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/github_action_state.json
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update github action state"
+          git push
