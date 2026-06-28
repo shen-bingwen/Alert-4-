@@ -1,8 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "updatedAt": "",
   "lastRunSummary": null,
   "alerts": [],
-  "dailyAlerts": {},
-  "latestQuotes": {}
+  "latestQuotes": {},
+  "anchors": {}
 }

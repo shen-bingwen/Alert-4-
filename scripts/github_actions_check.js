@@ -47,16 +47,6 @@ function writeJson(filePath, payload) {
   fs.writeFileSync(filePath, JSON.stringify(payload, null, 2), "utf8");
 }
 
-function getTodayShanghai() {
-  const formatter = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Shanghai",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  return formatter.format(new Date());
-}
-
 function getShanghaiParts(date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Shanghai",
@@ -96,6 +86,7 @@ function defaultConfig() {
     },
     rules: {
       triggerDropPct: 4,
+      progressiveDropPct: 4,
       oncePerDay: true,
     },
     watchlist: [],
@@ -129,6 +120,10 @@ function loadConfig() {
     },
     rules: {
       triggerDropPct: Math.max(0.1, toNumber(raw.rules?.triggerDropPct, 4)),
+      progressiveDropPct: Math.max(
+        0.1,
+        toNumber(raw.rules?.progressiveDropPct, toNumber(raw.rules?.triggerDropPct, 4))
+      ),
       oncePerDay: raw.rules?.oncePerDay !== false,
     },
     watchlist: watchlist.map(normalizeTarget).filter((item) => /^\d{6}$/.test(item.symbol)),
@@ -142,37 +137,49 @@ function loadConfig() {
 
 function defaultState() {
   return {
-    version: 1,
+    version: 3,
     updatedAt: nowIso(),
     lastRunSummary: null,
     alerts: [],
-    dailyAlerts: {},
     latestQuotes: {},
+    anchors: {},
   };
+}
+
+function normalizeAnchors(rawAnchors) {
+  const anchors = rawAnchors && typeof rawAnchors === "object" ? rawAnchors : {};
+  const result = {};
+  for (const [symbol, value] of Object.entries(anchors)) {
+    if (!value || typeof value !== "object") {
+      continue;
+    }
+    const initialBasePrice = toNumber(value.initialBasePrice, toNumber(value.basePrevClose, null));
+    result[symbol] = {
+      lastAlertPrice: toNumber(value.lastAlertPrice, null),
+      lastAlertAt: sanitizeString(value.lastAlertAt),
+      initialBasePrice,
+      nextTriggerPrice: toNumber(value.nextTriggerPrice, null),
+      progressiveDropPct: toNumber(value.progressiveDropPct, null),
+      triggerCount: Math.max(0, Math.trunc(toNumber(value.triggerCount, 0) || 0)),
+    };
+  }
+  return result;
 }
 
 function loadState() {
   const raw = readJson(STATE_PATH, defaultState());
   return {
-    version: 1,
+    version: 3,
     updatedAt: sanitizeString(raw.updatedAt) || nowIso(),
     lastRunSummary: raw.lastRunSummary && typeof raw.lastRunSummary === "object" ? raw.lastRunSummary : null,
     alerts: Array.isArray(raw.alerts) ? raw.alerts : [],
-    dailyAlerts: raw.dailyAlerts && typeof raw.dailyAlerts === "object" ? raw.dailyAlerts : {},
     latestQuotes: raw.latestQuotes && typeof raw.latestQuotes === "object" ? raw.latestQuotes : {},
+    anchors: normalizeAnchors(raw.anchors),
   };
 }
 
 function pruneState(state, config) {
   state.alerts = state.alerts.slice(0, config.runtime.maxHistory);
-  const today = getTodayShanghai();
-  const nextDailyAlerts = {};
-  for (const [dateKey, value] of Object.entries(state.dailyAlerts || {})) {
-    if (dateKey >= today) {
-      nextDailyAlerts[dateKey] = value;
-    }
-  }
-  state.dailyAlerts = nextDailyAlerts;
   return state;
 }
 
@@ -185,7 +192,7 @@ function marketPrefix(symbol) {
   return /^[56]/.test(symbol) ? "sh" : "sz";
 }
 
-function httpRequestText(url, options = {}) {
+function httpRequestBuffer(url, options = {}) {
   return new Promise((resolve, reject) => {
     const target = new URL(url);
     const request = https.request(
@@ -320,14 +327,16 @@ function parseTencentRows(text) {
 }
 
 async function fetchQuotes(symbols, timeoutMs) {
-  const uniqueSymbols = Array.from(new Set(symbols.map((item) => normalizeSymbol(item)).filter((item) => /^\d{6}$/.test(item))));
+  const uniqueSymbols = Array.from(
+    new Set(symbols.map((item) => normalizeSymbol(item)).filter((item) => /^\d{6}$/.test(item)))
+  );
   if (!uniqueSymbols.length) {
     return {};
   }
 
   const sinaList = uniqueSymbols.map((item) => `${marketPrefix(item)}${item}`).join(",");
   try {
-    const buffer = await httpRequestText(`https://hq.sinajs.cn/list=${encodeURIComponent(sinaList)}`, {
+    const buffer = await httpRequestBuffer(`https://hq.sinajs.cn/list=${encodeURIComponent(sinaList)}`, {
       timeoutMs,
       referer: "https://finance.sina.com.cn/",
     });
@@ -336,41 +345,116 @@ async function fetchQuotes(symbols, timeoutMs) {
       return parsed;
     }
   } catch (error) {
-    console.warn(`[quote] 新浪接口失败: ${error.message}`);
+    console.warn(`[quote] sina failed: ${error.message}`);
   }
 
   const tencentList = uniqueSymbols.map((item) => `${marketPrefix(item)}${item}`).join(",");
-  const buffer = await httpRequestText(`https://qt.gtimg.cn/q=${encodeURIComponent(tencentList)}`, {
+  const buffer = await httpRequestBuffer(`https://qt.gtimg.cn/q=${encodeURIComponent(tencentList)}`, {
     timeoutMs,
     referer: "https://gu.qq.com/",
   });
   return parseTencentRows(decodeBuffer(buffer));
 }
 
-function alreadyAlerted(state, dateKey, symbol) {
-  return Boolean(state.dailyAlerts?.[dateKey]?.[symbol]);
+function resolveProgressiveDropPct(config, target) {
+  if (target.thresholdPct !== null && target.thresholdPct !== undefined) {
+    return Number(target.thresholdPct.toFixed(2));
+  }
+  return Number(config.rules.progressiveDropPct.toFixed(2));
 }
 
-function markAlerted(state, dateKey, symbol) {
-  if (!state.dailyAlerts[dateKey]) {
-    state.dailyAlerts[dateKey] = {};
+function computeNextTriggerPrice(basePrice, progressiveDropPct) {
+  if (!Number.isFinite(basePrice) || basePrice <= 0) {
+    return null;
   }
-  state.dailyAlerts[dateKey][symbol] = true;
+  return Number((basePrice * (1 - progressiveDropPct / 100)).toFixed(6));
+}
+
+function computeCumulativeDropPct(initialBasePrice, currentPrice) {
+  if (!Number.isFinite(initialBasePrice) || initialBasePrice <= 0 || !Number.isFinite(currentPrice)) {
+    return null;
+  }
+  return Number(((1 - currentPrice / initialBasePrice) * 100).toFixed(4));
+}
+
+function getAnchor(state, symbol) {
+  return state.anchors?.[symbol] || null;
+}
+
+function shouldTriggerFromPrevClose(quote, triggerDropPct) {
+  return Number.isFinite(quote.dropPct) && quote.dropPct >= triggerDropPct;
+}
+
+function shouldTriggerFromAnchor(quote, anchor) {
+  if (!anchor || !Number.isFinite(anchor.nextTriggerPrice)) {
+    return false;
+  }
+  if (!Number.isFinite(quote.currentPrice)) {
+    return false;
+  }
+  return quote.currentPrice <= anchor.nextTriggerPrice;
+}
+
+function buildTriggerContext(config, target, quote, anchor) {
+  const triggerDropPct = Number(config.rules.triggerDropPct.toFixed(2));
+  const progressiveDropPct = resolveProgressiveDropPct(config, target);
+
+  if (!anchor || !Number.isFinite(anchor.lastAlertPrice)) {
+    const hit = shouldTriggerFromPrevClose(quote, triggerDropPct);
+    return {
+      hit,
+      kind: "from_prev_close",
+      triggerDropPct,
+      progressiveDropPct,
+      basePrice: quote.prevClose,
+      initialBasePrice: quote.prevClose,
+      nextTriggerPrice: hit ? computeNextTriggerPrice(quote.currentPrice, progressiveDropPct) : null,
+      nextTriggerCount: 1,
+    };
+  }
+
+  const hit = shouldTriggerFromAnchor(quote, anchor);
+  return {
+    hit,
+    kind: "from_last_alert_price",
+    triggerDropPct,
+    progressiveDropPct,
+    basePrice: anchor.lastAlertPrice,
+    initialBasePrice: anchor.initialBasePrice || anchor.lastAlertPrice,
+    nextTriggerPrice: hit ? computeNextTriggerPrice(quote.currentPrice, progressiveDropPct) : anchor.nextTriggerPrice,
+    nextTriggerCount: Math.max(1, (anchor.triggerCount || 0) + 1),
+  };
 }
 
 function buildWecomContent(alert) {
-  return [
+  const lines = [
     "## 定投提醒",
     `- 标的: ${alert.symbol} ${alert.name}`,
+  ];
+  if (alert.notes) {
+    lines.push(`- 备注: ${alert.notes}`);
+  }
+  lines.push(
+    `- 第几次触发: 第 ${alert.triggerCount} 次`,
     `- 当前价: ${alert.currentPrice.toFixed(3)}`,
     `- 昨收价: ${alert.prevClose.toFixed(3)}`,
     `- 当前涨跌幅: ${alert.rawChangePct.toFixed(2)}%`,
-    `- 当前跌幅: ${alert.dropPct.toFixed(2)}%`,
-    `- 触发线: ${alert.thresholdPct.toFixed(2)}%`,
+    `- 当前单日跌幅: ${alert.dropPct.toFixed(2)}%`,
+    `- 触发方式: ${
+      alert.triggerKind === "from_prev_close" ? "相对昨收首次触发" : "相对上一次触发价继续下跌"
+    }`,
+    `- 起点价: ${alert.initialBasePrice.toFixed(3)}`,
+    `- 本次基准价: ${alert.basePrice.toFixed(3)}`,
+    `- 相对起点累计跌幅: ${
+      alert.cumulativeDropPct !== null ? `${alert.cumulativeDropPct.toFixed(2)}%` : "--"
+    }`,
+    `- 下一次触发价: ${alert.nextTriggerPrice !== null ? alert.nextTriggerPrice.toFixed(3) : "--"}`,
+    `- 阶梯跌幅: ${alert.progressiveDropPct.toFixed(2)}%`,
     `- 时间: ${alert.checkedAt}`,
     "",
-    "已达到你的定投提醒线，可以决定是否执行一笔。",
-  ].join("\n");
+    "已达到你的定投提醒线，可以决定是否执行一笔。"
+  );
+  return lines.join("\n");
 }
 
 async function sendWecom(alert) {
@@ -390,7 +474,7 @@ async function sendWecom(alert) {
     },
   };
 
-  const buffer = await httpRequestText(webhook, {
+  const buffer = await httpRequestBuffer(webhook, {
     method: "POST",
     body: JSON.stringify(payload),
     referer: "https://work.weixin.qq.com/",
@@ -444,7 +528,6 @@ async function main() {
     ...quotes,
   };
 
-  const dateKey = getTodayShanghai();
   const alerts = [];
   let notifyFailedCount = 0;
 
@@ -455,33 +538,40 @@ async function main() {
       continue;
     }
 
-    const thresholdPct = Number(
-      (target.thresholdPct !== null && target.thresholdPct !== undefined
-        ? target.thresholdPct
-        : config.rules.triggerDropPct).toFixed(2)
-    );
+    const anchor = getAnchor(state, target.symbol);
+    const trigger = buildTriggerContext(config, target, quote, anchor);
 
-    if (!Number.isFinite(quote.dropPct) || quote.dropPct < thresholdPct) {
-      console.log(`[not-triggered] ${target.symbol} drop=${quote.dropPct?.toFixed(2) ?? "--"} threshold=${thresholdPct.toFixed(2)}`);
+    if (!trigger.hit) {
+      console.log(
+        `[not-triggered] ${target.symbol} current=${quote.currentPrice?.toFixed(3) ?? "--"} drop=${
+          quote.dropPct?.toFixed(2) ?? "--"
+        } kind=${trigger.kind}`
+      );
       continue;
     }
 
-    if (config.rules.oncePerDay && alreadyAlerted(state, dateKey, target.symbol)) {
-      console.log(`[already-alerted] ${target.symbol} ${dateKey}`);
-      continue;
-    }
+    const cumulativeDropPct = computeCumulativeDropPct(trigger.initialBasePrice, quote.currentPrice);
+    const triggerCount = trigger.nextTriggerCount;
 
     const alert = {
-      id: `${dateKey}:${target.symbol}`,
+      id: `${checkedAt}:${target.symbol}`,
       symbol: target.symbol,
       name: target.name || quote.name || "",
+      notes: target.notes || "",
       currentPrice: quote.currentPrice,
       prevClose: quote.prevClose,
       rawChangePct: quote.rawChangePct,
       dropPct: quote.dropPct,
-      thresholdPct,
       checkedAt,
       source: quote.source,
+      triggerKind: trigger.kind,
+      basePrice: trigger.basePrice,
+      initialBasePrice: trigger.initialBasePrice,
+      cumulativeDropPct,
+      triggerCount,
+      nextTriggerPrice: trigger.nextTriggerPrice,
+      progressiveDropPct: trigger.progressiveDropPct,
+      triggerDropPct: trigger.triggerDropPct,
     };
 
     let notifyResult;
@@ -495,9 +585,7 @@ async function main() {
       };
     }
 
-    if (notifyResult.ok || notifyResult.skipped) {
-      markAlerted(state, dateKey, target.symbol);
-    } else {
+    if (!notifyResult.ok && !notifyResult.skipped) {
       notifyFailedCount += 1;
     }
 
@@ -509,8 +597,21 @@ async function main() {
     };
 
     alerts.push(alertRecord);
+    state.anchors[target.symbol] = {
+      lastAlertPrice: quote.currentPrice,
+      lastAlertAt: checkedAt,
+      initialBasePrice: trigger.initialBasePrice,
+      nextTriggerPrice: trigger.nextTriggerPrice,
+      progressiveDropPct: trigger.progressiveDropPct,
+      triggerCount,
+    };
+
     console.log(
-      `[triggered] ${target.symbol} drop=${quote.dropPct.toFixed(2)} threshold=${thresholdPct.toFixed(2)} notify=${notifyResult.message}`
+      `[triggered] ${target.symbol} count=${triggerCount} current=${quote.currentPrice.toFixed(3)} trigger=${
+        trigger.kind
+      } next=${trigger.nextTriggerPrice !== null ? trigger.nextTriggerPrice.toFixed(3) : "--"} notify=${
+        notifyResult.message
+      }`
     );
   }
 

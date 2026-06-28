@@ -6,6 +6,7 @@
   },
   "rules": {
     "triggerDropPct": 0,
+    "progressiveDropPct": 4,
     "oncePerDay": true
   },
   "watchlist": [
@@ -16,10 +17,10 @@
       "notes": "改成你自己的监控标的"
     },
     {
-      "symbol": "159915",
-      "name": "创业板ETF",
-      "enabled": false,
-      "notes": "示例条目，可删除"
+      "symbol": "601360",
+      "name": "三六零",
+      "enabled": true,
+      "notes": "当前持有"
     }
   ],
   "runtime": {

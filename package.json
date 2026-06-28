@@ -6,7 +6,8 @@
   "main": "app/server.js",
   "scripts": {
     "start": "node app/server.js",
-    "check:github-actions": "node scripts/github_actions_check.js"
+    "check:github-actions": "node scripts/github_actions_check.js",
+    "watch:add": "node scripts/add_watch_symbol.js"
   },
   "engines": {
     "node": ">=18"

@@ -1,227 +1,212 @@
-# GitHub Actions 版部署说明
+# GitHub Actions 部署说明
 
-这份说明是给你现在这条低成本路线准备的：
+这条路线的目标是：
 
 - 不依赖你电脑开机
-- 先把提醒跑起来
-- 通过 GitHub Actions 定时执行
-- 命中后发企业微信机器人
+- 通过 GitHub Actions 定时运行
+- 企业微信机器人负责提醒
+- 支持“首次相对昨收跌 4% 提醒，之后每次在上一次触发价基础上再跌 4% 继续提醒”
 
-这套文件主要是：
+## 核心文件
 
 - [workflow](C:/Users/24951/Documents/Codex_66test/定投/.github/workflows/dca-alert.yml)
 - [监控脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/github_actions_check.js)
-- [GitHub 专用配置](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
+- [添加标的脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/add_watch_symbol.js)
+- [GitHub 配置](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
 - [GitHub 状态文件](C:/Users/24951/Documents/Codex_66test/定投/data/github_action_state.json)
 
-## 一、这版和本地版的区别
+## 现在的提醒规则
 
-本地版：
+现在不是“当天只要跌到 4% 就提醒一次然后结束”，而是：
 
-- 你电脑开着，脚本才会跑
-- 手机只是收通知或看本地页面
+1. 第一次触发
+   - 相对昨收价
+   - 当天跌幅 `>= 4%`
+   - 触发一次提醒
+2. 后续继续触发
+   - 以上一次触发时的价格作为新锚点
+   - 再下跌 `4%`
+   - 再提醒一次
 
-GitHub Actions 版：
-
-- GitHub 每 5 分钟帮你跑一次
-- 你电脑关机也没事
-- 重点是提醒，不是页面管理
-
-## 二、你要准备什么
-
-1. 一个 GitHub 账号
-2. 一个 GitHub 仓库
-3. 一个企业微信机器人 webhook
-
-## 三、建议怎么放仓库
-
-最简单的做法是：
-
-1. 新建一个私有仓库，比如 `dca-alert`
-2. 把整个 [定投](C:/Users/24951/Documents/Codex_66test/定投) 目录内容放进去
-
-如果你不想把本地版的文件都带上，也可以只放这几个路径：
+公式是：
 
 ```text
-.github/workflows/dca-alert.yml
-config/watchlist.github.json
-data/github_action_state.json
-scripts/github_actions_check.js
+下一次触发价 = 上一次触发价 × 0.96
+累计相对起点跌幅 = 1 - 0.96^n
 ```
 
-## 四、必须配置的 GitHub Secret
+## 10.00 起点的提醒过程示例
 
-打开你的仓库：
+如果起点是 `10.00`，那提醒会这样走：
 
-`Settings -> Secrets and variables -> Actions -> New repository secret`
+```text
+10.0000  起点
+ 9.6000  第1次触发
+ 9.2160  第2次触发
+ 8.8474  第3次触发
+ 8.4935  第4次触发
+ 8.1538  第5次触发
+ 7.8277  第6次触发
+ 7.5146  第7次触发
+ 7.2140  第8次触发
+ 6.9255  第9次触发
+ 6.6485  第10次触发
+```
 
-新增：
+举个完整过程：
 
-- 名称：`WECOM_WEBHOOK`
-- 值：你的企业微信机器人 webhook
+1. 昨收是 `10.00`
+2. 跌到 `9.60`，第一次提醒
+3. 系统把下一次提醒价记成 `9.60 × 0.96 = 9.216`
+4. 如果后面跌到 `9.30`，不会提醒
+5. 只有跌到 `9.216` 或更低，才会第二次提醒
+6. 第二次提醒后，新的下一次提醒价变成 `9.216 × 0.96 = 8.84736`
+7. 后面继续按这个规则往下推
 
-这个 secret 是必须的。  
-没有它，脚本会跑，但只会记状态，不会真的推送。
+所以它不是一直拿 `10.00` 去减 4%，而是每次都拿“上一次提醒价”继续减 4%。
 
-## 五、要改哪个配置文件
+## 企业微信现在会推送什么
 
-改这个：
+现在推送里会带：
+
+- 标的代码
+- 名称
+- 备注
+- 第几次触发
+- 当前价
+- 昨收价
+- 当前涨跌幅
+- 当前单日跌幅
+- 触发方式
+- 起点价
+- 本次基准价
+- 相对起点累计跌幅
+- 下一次触发价
+- 阶梯跌幅
+- 时间
+
+这样你收到消息时，就能直接看到：
+
+- 这是第几次提醒
+- 从最初起点累计跌了多少
+- 下一个提醒点在哪里
+
+## 配置文件怎么理解
+
+主配置文件：
 
 - [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
 
-最常用的是这几部分：
+示例：
 
 ```json
 {
   "rules": {
     "triggerDropPct": 4,
+    "progressiveDropPct": 4,
     "oncePerDay": true
   },
   "watchlist": [
     {
       "symbol": "510300",
       "name": "沪深300ETF",
-      "enabled": true
+      "enabled": true,
+      "notes": "核心仓"
     }
   ]
 }
 ```
 
-说明：
+字段说明：
 
 - `triggerDropPct`
-  - 全局跌幅提醒线，当前默认 4
-- `oncePerDay`
-  - 同一标的同一天只提醒一次
-- `watchlist`
-  - 监控标的列表
+  - 第一次相对昨收的触发线
+- `progressiveDropPct`
+  - 后续每次相对上一次提醒价继续下跌的比例
+- `symbol`
+  - 6 位代码
+- `name`
+  - 推送里显示的名称
+- `enabled`
+  - 是否监控
+- `notes`
+  - 备注，当前会一起推送
 
-你后面要加标的，就改这里。
+## `notes` 会不会推送
 
-## 六、Workflow 是怎么跑的
+会。
 
-当前 workflow 配置是：
+如果你写了：
 
-- 支持手动运行
-- 工作日每 5 分钟执行一次
+```json
+"notes": "核心仓"
+```
 
-文件：
+推送里会带：
 
-- [dca-alert.yml](C:/Users/24951/Documents/Codex_66test/定投/.github/workflows/dca-alert.yml)
+```text
+- 备注: 核心仓
+```
 
-这里用的是 GitHub Actions 的 `schedule + workflow_dispatch`：
-
-- `schedule`
-  - 自动跑
-- `workflow_dispatch`
-  - 你可以在 GitHub 页面里手动点 `Run workflow`
-
-## 七、为什么要有状态文件
-
-GitHub Actions 不是常驻进程，每次跑都是新环境。
-
-所以如果要保住：
-
-- 今天已经提醒过
-- 最近一次提醒记录
-- 最近行情快照
-
-就必须把状态写回仓库文件。
-
-这里用的是：
-
-- [github_action_state.json](C:/Users/24951/Documents/Codex_66test/定投/data/github_action_state.json)
-
-Workflow 每次跑完后会：
-
-1. 更新这个状态文件
-2. 自动提交回仓库
-
-这样下一次运行时，脚本就知道今天有没有提醒过。
-
-## 八、脚本做了什么
+## 怎么更简单地加标的
 
 脚本：
 
-- [github_actions_check.js](C:/Users/24951/Documents/Codex_66test/定投/scripts/github_actions_check.js)
+- [add_watch_symbol.js](C:/Users/24951/Documents/Codex_66test/定投/scripts/add_watch_symbol.js)
 
-流程是：
+最简单的用法，只输代码：
 
-1. 读 `watchlist.github.json`
-2. 判断是不是交易时段
-3. 拉行情
-4. 算跌幅
-5. 如果 `跌幅 >= 4%`
-6. 判断今天是否已经提醒过
-7. 发企业微信机器人
-8. 更新状态文件
+```bash
+node scripts/add_watch_symbol.js 512480
+```
 
-行情源逻辑：
+如果你想自己指定名称：
 
-- 优先新浪
-- 失败时回退腾讯
+```bash
+node scripts/add_watch_symbol.js 512480 "半导体ETF"
+```
 
-## 九、第一次怎么验证
+如果你还想顺手写阈值和备注：
 
-建议你第一次这样做：
+```bash
+node scripts/add_watch_symbol.js 512480 "半导体ETF" 4 "核心仓"
+```
 
-1. 把仓库推上去
-2. 配好 `WECOM_WEBHOOK`
-3. 改好 `watchlist.github.json`
-4. 打开 GitHub 仓库的 `Actions`
-5. 找到 `DCA Alert`
-6. 点 `Run workflow`
+如果你不写名称，只想写阈值和备注，也可以：
 
-看这几项：
+```bash
+node scripts/add_watch_symbol.js 512480 4 "核心仓"
+```
 
-- workflow 是否成功
-- 日志里是否有 `summary`
-- 企业微信是否收到消息
+如果你更习惯 npm，也可以：
 
-如果当天没有达到阈值，也可能不会推送。  
-这种情况下你主要看 workflow 有没有正常跑完。
+```bash
+npm.cmd run watch:add -- 512480
+```
 
-## 十、你现在要知道的限制
+## Workflow 做了什么调整
 
-1. 这版不是网页后台
-   - 不能像网站那样手机直接点点点改配置
-   - 改阈值和代码要改仓库文件
+我已经把 workflow 里的 Action 版本和 Node 版本更新了，减少旧 runtime 警告。
 
-2. GitHub Actions 不是交易系统
-   - 定时任务可能不是秒级准时
-   - 更适合提醒，不适合高频监控
+## 怎么部署
 
-3. 最短就是 5 分钟级
-   - 这对你的定投提醒通常已经够用
+1. 把这些文件 push 到 GitHub 仓库
+2. 配置 `WECOM_WEBHOOK` secret
+3. 修改 [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
+4. 手动运行一次 `DCA Alert`
 
-4. 状态提交会产生很多小 commit
-   - 这是这条路线的正常代价
+## 怎么测试
 
-## 十一、怎么理解“免费”
+如果你现在只是想先测试推送链路：
 
-这条路的核心成本优势在于：
+1. 临时把 `onlyTradingHours` 改成 `false`
+2. 临时把 `triggerDropPct` 改小一点
+3. 手动运行 workflow
 
-- 不用买服务器就能先跑起来
-- 不用你电脑一直开机
-- 企业微信机器人本身通常不单独收费
+测试结束后再改回正式值：
 
-但也要知道：
-
-- GitHub Actions 免费额度并不是无限的
-- 如果你以后扩展得很重，还是可能转向正式云服务器
-
-## 十二、最适合你的使用阶段
-
-这条路最适合：
-
-- 你现在先想低成本验证提醒
-- 你还不想马上买服务器
-- 你可以接受“改配置靠改仓库文件”
-
-如果后面你想升级成：
-
-- 手机外网直接打开页面
-- 随时在线改阈值
-- 更像一个正式小后台
-
-那下一步就是从这版再升级到云服务器公网版。
+```json
+"onlyTradingHours": true
+"triggerDropPct": 4
+"progressiveDropPct": 4
+```
