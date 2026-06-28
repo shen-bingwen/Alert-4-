@@ -2,10 +2,10 @@
   "appName": "4%定投提醒工具",
   "schedule": {
     "enabled": true,
-    "onlyTradingHours": true
+    "onlyTradingHours": false
   },
   "rules": {
-    "triggerDropPct": 4,
+    "triggerDropPct": 0,
     "oncePerDay": true
   },
   "watchlist": [
