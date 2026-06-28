@@ -1,8 +1,101 @@
 {
-  "version": 2,
-  "updatedAt": "",
-  "lastRunSummary": null,
-  "alerts": [],
-  "latestQuotes": {},
-  "anchors": {}
+  "version": 3,
+  "updatedAt": "2026-06-28T12:29:40.242Z",
+  "lastRunSummary": {
+    "checkedAt": "2026-06-28T12:29:37.017Z",
+    "checkedCount": 2,
+    "triggeredCount": 2,
+    "notifyFailedCount": 0,
+    "tradingTime": false
+  },
+  "alerts": [
+    {
+      "id": "2026-06-28T12:29:37.017Z:601360",
+      "symbol": "601360",
+      "name": "三六零",
+      "notes": "当前持有",
+      "currentPrice": 8.48,
+      "prevClose": 8.95,
+      "rawChangePct": -5.2514,
+      "dropPct": 5.2514,
+      "checkedAt": "2026-06-28T12:29:37.017Z",
+      "source": "tencent",
+      "triggerKind": "from_prev_close",
+      "basePrice": 8.95,
+      "initialBasePrice": 8.95,
+      "cumulativeDropPct": 5.2514,
+      "triggerCount": 1,
+      "nextTriggerPrice": 8.1408,
+      "progressiveDropPct": 4,
+      "triggerDropPct": 0.1,
+      "notifyOk": true,
+      "notifySkipped": false,
+      "notifyMessage": "企业微信推送成功。"
+    },
+    {
+      "id": "2026-06-28T12:29:37.017Z:510300",
+      "symbol": "510300",
+      "name": "沪深300ETF",
+      "notes": "改成你自己的监控标的",
+      "currentPrice": 4.907,
+      "prevClose": 5.048,
+      "rawChangePct": -2.7932,
+      "dropPct": 2.7932,
+      "checkedAt": "2026-06-28T12:29:37.017Z",
+      "source": "tencent",
+      "triggerKind": "from_prev_close",
+      "basePrice": 5.048,
+      "initialBasePrice": 5.048,
+      "cumulativeDropPct": 2.7932,
+      "triggerCount": 1,
+      "nextTriggerPrice": 4.71072,
+      "progressiveDropPct": 4,
+      "triggerDropPct": 0.1,
+      "notifyOk": true,
+      "notifySkipped": false,
+      "notifyMessage": "企业微信推送成功。"
+    }
+  ],
+  "latestQuotes": {
+    "510300": {
+      "symbol": "510300",
+      "name": "沪深300ETF华泰柏瑞",
+      "open": 5.008,
+      "prevClose": 5.048,
+      "currentPrice": 4.907,
+      "rawChangePct": -2.7932,
+      "dropPct": 2.7932,
+      "source": "tencent",
+      "fetchedAt": "2026-06-28T12:29:39.071Z"
+    },
+    "601360": {
+      "symbol": "601360",
+      "name": "三六零",
+      "open": 8.84,
+      "prevClose": 8.95,
+      "currentPrice": 8.48,
+      "rawChangePct": -5.2514,
+      "dropPct": 5.2514,
+      "source": "tencent",
+      "fetchedAt": "2026-06-28T12:29:39.071Z"
+    }
+  },
+  "anchors": {
+    "510300": {
+      "lastAlertPrice": 4.907,
+      "lastAlertAt": "2026-06-28T12:29:37.017Z",
+      "initialBasePrice": 5.048,
+      "nextTriggerPrice": 4.71072,
+      "progressiveDropPct": 4,
+      "triggerCount": 1
+    },
+    "601360": {
+      "lastAlertPrice": 8.48,
+      "lastAlertAt": "2026-06-28T12:29:37.017Z",
+      "initialBasePrice": 8.95,
+      "nextTriggerPrice": 8.1408,
+      "progressiveDropPct": 4,
+      "triggerCount": 1
+    }
+  }
 }
