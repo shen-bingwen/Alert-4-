@@ -4,11 +4,13 @@
 
 核心文件：
 
-- [workflow](C:/Users/24951/Documents/Codex_66test/定投/.github/workflows/dca-alert.yml)
-- [监控脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/github_actions_check.js)
-- [添加标的脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/add_watch_symbol.js)
-- [配置文件](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
-- [说明文档](C:/Users/24951/Documents/Codex_66test/定投/docs/GITHUB_ACTIONS部署说明.md)
+- [workflow](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/.github/workflows/dca-alert.yml)
+- [监控脚本](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/scripts/github_actions_check.js)
+- [添加标的脚本](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/scripts/add_watch_symbol.js)
+- [配置文件](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/config/watchlist.github.json)
+- [说明文档](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/docs/GITHUB_ACTIONS部署说明.md)
+- [添加代码教程](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/docs/如何添加股票基金代码.md)
+- [修改推送教程](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/docs/如何修改推送内容.md)
 
 提醒方式：
 

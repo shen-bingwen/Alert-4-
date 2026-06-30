@@ -93,7 +93,6 @@ function defaultConfig() {
     runtime: {
       quoteTimeoutMs: 15000,
       maxHistory: 80,
-      maxChecks: 40,
     },
   };
 }
@@ -130,7 +129,6 @@ function loadConfig() {
     runtime: {
       quoteTimeoutMs: Math.max(5000, toNumber(raw.runtime?.quoteTimeoutMs, 15000)),
       maxHistory: Math.max(20, toNumber(raw.runtime?.maxHistory, 80)),
-      maxChecks: Math.max(10, toNumber(raw.runtime?.maxChecks, 40)),
     },
   };
 }
@@ -356,7 +354,7 @@ async function fetchQuotes(symbols, timeoutMs) {
   return parseTencentRows(decodeBuffer(buffer));
 }
 
-function resolveProgressiveDropPct(config, target) {
+function resolveTargetDropPct(config, target) {
   if (target.thresholdPct !== null && target.thresholdPct !== undefined) {
     return Number(target.thresholdPct.toFixed(2));
   }
@@ -396,8 +394,9 @@ function shouldTriggerFromAnchor(quote, anchor) {
 }
 
 function buildTriggerContext(config, target, quote, anchor) {
-  const triggerDropPct = Number(config.rules.triggerDropPct.toFixed(2));
-  const progressiveDropPct = resolveProgressiveDropPct(config, target);
+  const targetDropPct = resolveTargetDropPct(config, target);
+  const triggerDropPct = targetDropPct;
+  const progressiveDropPct = targetDropPct;
 
   if (!anchor || !Number.isFinite(anchor.lastAlertPrice)) {
     const hit = shouldTriggerFromPrevClose(quote, triggerDropPct);
@@ -426,20 +425,21 @@ function buildTriggerContext(config, target, quote, anchor) {
   };
 }
 
+// 企业微信推送内容在这里改：调整 lines 里的文字或删减字段即可。
 function buildWecomContent(alert) {
   const lines = [
     "## 定投提醒",
     `- 标的: ${alert.symbol} ${alert.name}`,
   ];
-  if (alert.notes) {
-    lines.push(`- 备注: ${alert.notes}`);
-  }
+  // if (alert.notes) {
+  //   lines.push(`- 备注: ${alert.notes}`);
+  // }
   lines.push(
     `- 第几次触发: 第 ${alert.triggerCount} 次`,
     `- 当前价: ${alert.currentPrice.toFixed(3)}`,
     `- 昨收价: ${alert.prevClose.toFixed(3)}`,
     `- 当前涨跌幅: ${alert.rawChangePct.toFixed(2)}%`,
-    `- 当前单日跌幅: ${alert.dropPct.toFixed(2)}%`,
+    // `- 当前单日跌幅: ${alert.dropPct.toFixed(2)}%`,
     `- 触发方式: ${
       alert.triggerKind === "from_prev_close" ? "相对昨收首次触发" : "相对上一次触发价继续下跌"
     }`,

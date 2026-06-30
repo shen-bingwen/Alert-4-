@@ -25,7 +25,6 @@
   ],
   "runtime": {
     "quoteTimeoutMs": 15000,
-    "maxHistory": 80,
-    "maxChecks": 40
+    "maxHistory": 80
   }
 }

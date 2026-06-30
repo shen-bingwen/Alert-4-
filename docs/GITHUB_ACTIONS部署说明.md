@@ -25,11 +25,11 @@ GitHub Actions 会在北京时间周一到周五的这些时间点运行：
 
 ## 核心文件
 
-- [workflow](C:/Users/24951/Documents/Codex_66test/定投/.github/workflows/dca-alert.yml)
-- [监控脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/github_actions_check.js)
-- [添加标的脚本](C:/Users/24951/Documents/Codex_66test/定投/scripts/add_watch_symbol.js)
-- [GitHub 配置](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
-- [GitHub 状态文件](C:/Users/24951/Documents/Codex_66test/定投/data/github_action_state.json)
+- [workflow](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/.github/workflows/dca-alert.yml)
+- [监控脚本](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/scripts/github_actions_check.js)
+- [添加标的脚本](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/scripts/add_watch_symbol.js)
+- [GitHub 配置](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/config/watchlist.github.json)
+- [GitHub 状态文件](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/data/github_action_state.json)
 
 ## 现在的提醒规则
 
@@ -111,7 +111,7 @@ GitHub Actions 会在北京时间周一到周五的这些时间点运行：
 
 主配置文件：
 
-- [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
+- [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/config/watchlist.github.json)
 
 示例：
 
@@ -168,7 +168,7 @@ GitHub Actions 会在北京时间周一到周五的这些时间点运行：
 
 脚本：
 
-- [add_watch_symbol.js](C:/Users/24951/Documents/Codex_66test/定投/scripts/add_watch_symbol.js)
+- [add_watch_symbol.js](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/scripts/add_watch_symbol.js)
 
 最简单的用法，只输代码：
 
@@ -208,7 +208,7 @@ npm.cmd run watch:add -- 512480
 
 1. 把这些文件 push 到 GitHub 仓库
 2. 配置 `WECOM_WEBHOOK` secret
-3. 修改 [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/定投/config/watchlist.github.json)
+3. 修改 [watchlist.github.json](C:/Users/24951/Documents/Codex_66test/Dollar-Cost Averaging/config/watchlist.github.json)
 4. 手动运行一次 `DCA Alert`
 
 ## 怎么测试
