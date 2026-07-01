@@ -15,6 +15,13 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+function getRunContext() {
+  const eventName = sanitizeString(process.env.GITHUB_EVENT_NAME) || "unknown";
+  const sha = sanitizeString(process.env.GITHUB_SHA) || "unknown";
+  const ref = sanitizeString(process.env.GITHUB_REF) || "unknown";
+  return { eventName, sha, ref };
+}
+
 function sanitizeString(value) {
   return String(value || "").trim();
 }
@@ -505,6 +512,11 @@ async function main() {
   const state = pruneState(loadState(), config);
   const checkedAt = nowIso();
   const tradingTime = isTradingTime();
+  const runContext = getRunContext();
+
+  console.log(
+    `[context] event=${runContext.eventName} sha=${runContext.sha.slice(0, 7)} ref=${runContext.ref} checkedAt=${checkedAt} tradingTime=${tradingTime}`
+  );
 
   if (!config.schedule.enabled) {
     console.log("[skip] schedule disabled");
