@@ -1,8 +1,8 @@
 {
   "version": 3,
-  "updatedAt": "2026-08-26T05:28:31.333Z",
+  "updatedAt": "2026-08-26T06:00:28.314Z",
   "lastRunSummary": {
-    "checkedAt": "2026-08-26T05:28:28.764Z",
+    "checkedAt": "2026-08-26T06:00:25.828Z",
     "checkedCount": 2,
     "triggeredCount": 0,
     "notifyFailedCount": 0,
@@ -89,7 +89,7 @@
       "rawChangePct": 0.8666,
       "dropPct": 0,
       "source": "tencent",
-      "fetchedAt": "2026-08-26T05:28:31.333Z"
+      "fetchedAt": "2026-08-26T06:00:28.314Z"
     },
     "601360": {
       "symbol": "601360",
@@ -100,7 +100,7 @@
       "rawChangePct": 0.348,
       "dropPct": 0,
       "source": "tencent",
-      "fetchedAt": "2026-08-26T05:28:31.333Z"
+      "fetchedAt": "2026-08-26T06:00:28.314Z"
     }
   },
   "anchors": {
