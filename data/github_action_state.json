@@ -1,8 +1,8 @@
 {
   "version": 3,
-  "updatedAt": "2026-09-17T06:27:18.509Z",
+  "updatedAt": "2026-09-18T06:20:56.943Z",
   "lastRunSummary": {
-    "checkedAt": "2026-09-17T06:27:16.089Z",
+    "checkedAt": "2026-09-18T06:20:54.198Z",
     "checkedCount": 2,
     "triggeredCount": 0,
     "notifyFailedCount": 0,
@@ -83,24 +83,24 @@
     "510300": {
       "symbol": "510300",
       "name": "沪深300ETF华泰柏瑞",
-      "open": 4.539,
-      "prevClose": 4.55,
-      "currentPrice": 4.533,
-      "rawChangePct": -0.3736,
-      "dropPct": 0.3736,
+      "open": 4.556,
+      "prevClose": 4.532,
+      "currentPrice": 4.571,
+      "rawChangePct": 0.8605,
+      "dropPct": 0,
       "source": "tencent",
-      "fetchedAt": "2026-09-17T06:27:18.509Z"
+      "fetchedAt": "2026-09-18T06:20:56.943Z"
     },
     "601360": {
       "symbol": "601360",
       "name": "三六零",
       "open": 8.71,
-      "prevClose": 8.78,
-      "currentPrice": 8.67,
-      "rawChangePct": -1.2528,
-      "dropPct": 1.2528,
+      "prevClose": 8.65,
+      "currentPrice": 8.76,
+      "rawChangePct": 1.2717,
+      "dropPct": 0,
       "source": "tencent",
-      "fetchedAt": "2026-09-17T06:27:18.509Z"
+      "fetchedAt": "2026-09-18T06:20:56.943Z"
     }
   },
   "anchors": {
