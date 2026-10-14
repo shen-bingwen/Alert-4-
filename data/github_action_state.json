@@ -1,14 +1,37 @@
 {
   "version": 3,
-  "updatedAt": "2026-09-25T06:24:24.418Z",
+  "updatedAt": "2026-10-14T06:30:13.688Z",
   "lastRunSummary": {
-    "checkedAt": "2026-09-25T06:24:22.498Z",
+    "checkedAt": "2026-10-14T06:30:10.815Z",
     "checkedCount": 2,
-    "triggeredCount": 0,
+    "triggeredCount": 1,
     "notifyFailedCount": 0,
     "tradingTime": true
   },
   "alerts": [
+    {
+      "id": "2026-10-14T06:30:10.815Z:510300",
+      "symbol": "510300",
+      "name": "沪深300ETF",
+      "notes": "改成你自己的监控标的",
+      "currentPrice": 4.292,
+      "prevClose": 4.345,
+      "rawChangePct": -1.2198,
+      "dropPct": 1.2198,
+      "checkedAt": "2026-10-14T06:30:10.815Z",
+      "source": "tencent",
+      "triggerKind": "from_last_alert_price",
+      "basePrice": 4.577,
+      "initialBasePrice": 5.048,
+      "cumulativeDropPct": 14.9762,
+      "triggerCount": 3,
+      "nextTriggerPrice": 4.12032,
+      "progressiveDropPct": 4,
+      "triggerDropPct": 4,
+      "notifyOk": true,
+      "notifySkipped": false,
+      "notifyMessage": "企业微信推送成功。"
+    },
     {
       "id": "2026-07-17T05:39:08.132Z:510300",
       "symbol": "510300",
@@ -83,34 +106,34 @@
     "510300": {
       "symbol": "510300",
       "name": "沪深300ETF华泰柏瑞",
-      "open": 4.578,
-      "prevClose": 4.59,
-      "currentPrice": 4.515,
-      "rawChangePct": -1.634,
-      "dropPct": 1.634,
+      "open": 4.336,
+      "prevClose": 4.345,
+      "currentPrice": 4.292,
+      "rawChangePct": -1.2198,
+      "dropPct": 1.2198,
       "source": "tencent",
-      "fetchedAt": "2026-09-25T06:24:24.417Z"
+      "fetchedAt": "2026-10-14T06:30:12.879Z"
     },
     "601360": {
       "symbol": "601360",
       "name": "三六零",
-      "open": 9.03,
-      "prevClose": 9.03,
-      "currentPrice": 8.95,
-      "rawChangePct": -0.8859,
-      "dropPct": 0.8859,
+      "open": 8.87,
+      "prevClose": 8.92,
+      "currentPrice": 8.79,
+      "rawChangePct": -1.4574,
+      "dropPct": 1.4574,
       "source": "tencent",
-      "fetchedAt": "2026-09-25T06:24:24.418Z"
+      "fetchedAt": "2026-10-14T06:30:12.879Z"
     }
   },
   "anchors": {
     "510300": {
-      "lastAlertPrice": 4.577,
-      "lastAlertAt": "2026-07-17T05:39:08.132Z",
+      "lastAlertPrice": 4.292,
+      "lastAlertAt": "2026-10-14T06:30:10.815Z",
       "initialBasePrice": 5.048,
-      "nextTriggerPrice": 4.39392,
+      "nextTriggerPrice": 4.12032,
       "progressiveDropPct": 4,
-      "triggerCount": 2
+      "triggerCount": 3
     },
     "601360": {
       "lastAlertPrice": 8.48,
