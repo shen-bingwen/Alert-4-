@@ -1,14 +1,37 @@
 {
   "version": 3,
-  "updatedAt": "2026-10-22T06:24:10.812Z",
+  "updatedAt": "2026-10-22T06:59:03.550Z",
   "lastRunSummary": {
-    "checkedAt": "2026-10-22T06:24:09.260Z",
+    "checkedAt": "2026-10-22T06:59:00.621Z",
     "checkedCount": 2,
-    "triggeredCount": 0,
+    "triggeredCount": 1,
     "notifyFailedCount": 0,
     "tradingTime": true
   },
   "alerts": [
+    {
+      "id": "2026-10-22T06:59:00.621Z:510300",
+      "symbol": "510300",
+      "name": "沪深300ETF",
+      "notes": "改成你自己的监控标的",
+      "currentPrice": 4.107,
+      "prevClose": 4.185,
+      "rawChangePct": -1.8638,
+      "dropPct": 1.8638,
+      "checkedAt": "2026-10-22T06:59:00.621Z",
+      "source": "tencent",
+      "triggerKind": "from_last_alert_price",
+      "basePrice": 4.292,
+      "initialBasePrice": 5.048,
+      "cumulativeDropPct": 18.641,
+      "triggerCount": 4,
+      "nextTriggerPrice": 3.94272,
+      "progressiveDropPct": 4,
+      "triggerDropPct": 4,
+      "notifyOk": true,
+      "notifySkipped": false,
+      "notifyMessage": "企业微信推送成功。"
+    },
     {
       "id": "2026-10-14T06:30:10.815Z:510300",
       "symbol": "510300",
@@ -108,32 +131,32 @@
       "name": "沪深300ETF华泰柏瑞",
       "open": 4.185,
       "prevClose": 4.185,
-      "currentPrice": 4.123,
-      "rawChangePct": -1.4815,
-      "dropPct": 1.4815,
+      "currentPrice": 4.107,
+      "rawChangePct": -1.8638,
+      "dropPct": 1.8638,
       "source": "tencent",
-      "fetchedAt": "2026-10-22T06:24:10.812Z"
+      "fetchedAt": "2026-10-22T06:59:02.764Z"
     },
     "601360": {
       "symbol": "601360",
       "name": "三六零",
       "open": 8.59,
       "prevClose": 8.44,
-      "currentPrice": 8.29,
-      "rawChangePct": -1.7773,
-      "dropPct": 1.7773,
+      "currentPrice": 8.25,
+      "rawChangePct": -2.2512,
+      "dropPct": 2.2512,
       "source": "tencent",
-      "fetchedAt": "2026-10-22T06:24:10.812Z"
+      "fetchedAt": "2026-10-22T06:59:02.764Z"
     }
   },
   "anchors": {
     "510300": {
-      "lastAlertPrice": 4.292,
-      "lastAlertAt": "2026-10-14T06:30:10.815Z",
+      "lastAlertPrice": 4.107,
+      "lastAlertAt": "2026-10-22T06:59:00.621Z",
       "initialBasePrice": 5.048,
-      "nextTriggerPrice": 4.12032,
+      "nextTriggerPrice": 3.94272,
       "progressiveDropPct": 4,
-      "triggerCount": 3
+      "triggerCount": 4
     },
     "601360": {
       "lastAlertPrice": 8.48,
